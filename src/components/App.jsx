@@ -52,18 +52,13 @@ export const App = () =>{
           justifyContent='center'
           alignItems='center'
         >
-          {error !==null 
-            ? <ErrorMessage/>
-            : <>
-            <SecondaryTitle>Contact</SecondaryTitle>
-            <Filter title="Find contacs by name"/>
-            {isLoading 
+          <SecondaryTitle>Contact</SecondaryTitle>
+          <Filter title="Find contacs by name"/>
+          {error !==null && <ErrorMessage/>}
+          {isLoading 
               ? <Loader/>
               : <Contact/>
-            }
-            </>
           }
-          
             
         </Container>
 
