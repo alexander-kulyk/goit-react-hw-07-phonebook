@@ -4,6 +4,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import 'react-toastify/dist/ReactToastify.css';
 import { addContact, deleteContact, fetchContacts } from "./opirations";
 
+const handelePending = state =>{
+    state.isLoading =true;
+};
+
+const handleRejected = (state, action) =>{
+    state.isLoading = false;
+    state.error = action.payload;
+};
+
+
+
 
 const phoneBookSlice = createSlice({
     name: 'phoneBook',
@@ -13,6 +24,8 @@ const phoneBookSlice = createSlice({
         error: null
     },
     extraReducers:{
+
+        // -----fetchContacts----------
         [fetchContacts.pending](state){
             state.isLoading =true;
         },
@@ -26,10 +39,9 @@ const phoneBookSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        [addContact.pending](state){
-            console.log('pending')
-            state.isLoading = true
-        },
+
+        // ------addContact-------------------
+        [addContact.pending]: handelePending,
         [addContact.fulfilled](state, action){
             
             console.log('action.payload', action.payload)
@@ -37,20 +49,17 @@ const phoneBookSlice = createSlice({
             //state.items.push(action.payload)
             state.items = [action.payload, ...state.items]
         },
+        [addContact.rejected]:handleRejected,
 
 
-        [deleteContact.pending](state) {
-            state.isLoading = true;
-        },
+        // -------------deleteContact----------------
+        [deleteContact.pending]:handelePending,
         [deleteContact.fulfilled](state, action) {
             console.log('action', action.payload)
             state.isLoading = false;
             state.items = state.items.filter(item => item.id !== action.payload.id);
         },
-        [deleteContact.rejected](state, action) {
-            state.isLoading = false;
-            state.error = action.payload;
-          },
+        [deleteContact.rejected]:handleRejected,
     }
 
 });
