@@ -34,20 +34,8 @@ const phoneBookSlice = createSlice({
             
             console.log('action.payload', action.payload)
             state.isLoading = false;
-            state.items.push(action.payload)
-
-            //const checkContact = state.items.find(item =>item.name === name);
-           // const checkContact = contacts.some(item => item.name === name);
-
-        //    if (checkContact  !== undefined) {
-        //         toast.error(`${name} is already in contacts.`)
-        //     }else{
-        //     state.items.push({
-        //         id: nanoid(),
-        //         name,
-        //         phone,})
-        //     }
-
+            //state.items.push(action.payload)
+            state.items = [action.payload, ...state.items]
         },
 
 
@@ -65,7 +53,19 @@ const phoneBookSlice = createSlice({
           },
     }
 
-    // reducers:{
+});
+
+
+export const {addNewCotact, fetchingInProgress, fetchingSuccess, fetchingError}  = phoneBookSlice.actions;
+
+export const phoneBookReduser = phoneBookSlice.reducer
+
+
+
+
+
+
+// reducers:{
     //     fetchingInProgress (state){
     //         state.isLoading = true;
             
@@ -106,11 +106,3 @@ const phoneBookSlice = createSlice({
     //     },
 
     // }
-
-});
-
-
-export const {addNewCotact, fetchingInProgress, fetchingSuccess, fetchingError}  = phoneBookSlice.actions;
-
-export default phoneBookSlice.reducer
-
