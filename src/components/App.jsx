@@ -9,6 +9,9 @@ import { Filter } from "./Filter/Filter";
 import { PrimaryTitle, SecondaryTitle } from "./Titles/Titles";
 
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from 'redux/opirations';
 
 export const initContacts =[
       {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -18,6 +21,14 @@ export const initContacts =[
 ]
 
 export const App = () =>{
+  const dispatch = useDispatch();
+  const {isLoading} = useSelector(state => state.contacts)
+
+  useEffect(() => {
+    dispatch(fetchContacts())
+   
+  }, [dispatch])
+  
 
   return (
 
@@ -47,7 +58,11 @@ export const App = () =>{
         >
           <SecondaryTitle>Contact</SecondaryTitle>
             <Filter title="Find contacs by name"/>
-            <Contact/>
+            {isLoading 
+              ? <p>Loading contacts...</p>
+              : <Contact/>
+              }
+            
         </Container>
 
       </Container>

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
-import { deleteContact } from "redux/phoneBookSlice";
+import { deleteContact } from "redux/opirations";
+
 import { ContactList, ItemsContact,DeleteBtn, Notification } from "./ContactList.styled"
 
 
 export const Contact = () =>{
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts.contacts);
+    const contacts = useSelector(state => state.contacts.items);
     const query = useSelector(state => state.filter.filter);
 
     
@@ -28,9 +29,9 @@ export const Contact = () =>{
                 ? <Notification>You have no contacts</Notification>
                 : visibleContact.length === 0
                     ? <Notification>contact not found</Notification>
-                    : visibleContact.map(({id, name, number}) =>(
+                    : visibleContact.map(({id, name, phone}) =>(
                         <ItemsContact 
-                        key={id}>{name}: {number} <DeleteBtn type="button" onClick={()=>dispatch(deleteContact({id}))}>delete</DeleteBtn>
+                        key={id}>{name}: {phone} <DeleteBtn type="button" onClick={()=>dispatch(deleteContact(id))}>delete</DeleteBtn>
                         </ItemsContact>
              
                     ))

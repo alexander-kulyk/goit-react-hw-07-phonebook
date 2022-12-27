@@ -1,7 +1,9 @@
 import { nanoid } from 'nanoid';
 import { Button, FormContact, Input, Label } from "./Form.styled";
-import { useDispatch } from 'react-redux';
-import { addNewCotact } from 'redux/phoneBookSlice';
+import { useDispatch, useSelector } from 'react-redux';
+//import { addNewCotact } from 'redux/phoneBookSlice';
+import { addContact } from 'redux/opirations';
+import { toast } from 'react-toastify';
 
 
 const idInputName = nanoid();
@@ -12,14 +14,23 @@ const idInputNamber = nanoid();
 
 export const ContactForm = () =>{
     const dispatch  = useDispatch();
-    
+    const contacts = useSelector(state => state.contacts.items)
+
     const handleSubmit = e => {
         e.preventDefault();
-
+        console.log('contacts', contacts)
+        const form = e.target
         const name = e.currentTarget.elements.name.value;
-        const number = e.currentTarget.elements.number.value;
+        const phone = e.currentTarget.elements.number.value;
 
-        dispatch(addNewCotact({name, number})); 
+        const checkContact = contacts.find(item =>item.name === name);
+
+        if (checkContact !== undefined) {
+            toast.error(`${name} is already in contacts.`)
+        }else{
+            dispatch(addContact({ name, phone })); 
+            form.reset();
+        }
     };
 
     
