@@ -13,11 +13,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/opirations';
 import { Loader } from './Loader/Loader';
+import { ErrorMessage } from './Error/ErrorMessage';
 
 
 export const App = () =>{
   const dispatch = useDispatch();
-  const {isLoading} = useSelector(state => state.contacts)
+  const {error, isLoading} = useSelector(state => state.contacts)
 
   useEffect(() => {
     dispatch(fetchContacts())
@@ -51,12 +52,18 @@ export const App = () =>{
           justifyContent='center'
           alignItems='center'
         >
-          <SecondaryTitle>Contact</SecondaryTitle>
+          {error !==null 
+            ? <ErrorMessage/>
+            : <>
+            <SecondaryTitle>Contact</SecondaryTitle>
             <Filter title="Find contacs by name"/>
             {isLoading 
               ? <Loader/>
               : <Contact/>
             }
+            </>
+          }
+          
             
         </Container>
 

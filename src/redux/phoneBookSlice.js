@@ -17,7 +17,7 @@ const handleRejected = (state, action) =>{
 
 
 const phoneBookSlice = createSlice({
-    
+
     name: 'phoneBook',
     initialState:{
         items: [],
