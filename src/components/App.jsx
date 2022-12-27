@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/opirations';
+import { Loader } from './Loader/Loader';
 
 export const initContacts =[
       {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -59,9 +60,9 @@ export const App = () =>{
           <SecondaryTitle>Contact</SecondaryTitle>
             <Filter title="Find contacs by name"/>
             {isLoading 
-              ? <p>Loading contacts...</p>
+              ? <Loader/>
               : <Contact/>
-              }
+            }
             
         </Container>
 
