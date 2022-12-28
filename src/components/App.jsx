@@ -12,8 +12,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/opirations';
-import { Loader } from './Loader/Loader';
+//import { Loader } from './Loader/Loader';
 import { ErrorMessage } from './Error/ErrorMessage';
+import SkeletLoader from './Form/SkeletonLoader/SkeletonLoader';
 
 
 export const App = () =>{
@@ -56,7 +57,7 @@ export const App = () =>{
           <Filter title="Find contacs by name"/>
           {error !==null && <ErrorMessage/>}
           {isLoading 
-              ? <Loader/>
+              ? <SkeletLoader/>
               : <Contact/>
           }
             
