@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/opirations';
 //import { Loader } from './Loader/Loader';
 import { ErrorMessage } from './Error/ErrorMessage';
-import SkeletLoader from './Form/SkeletonLoader/SkeletonLoader';
+import SkeletLoader from './SkeletonLoader/SkeletonLoader';
 
 
 export const App = () =>{
