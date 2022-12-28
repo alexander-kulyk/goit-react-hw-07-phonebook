@@ -1,4 +1,4 @@
-
+import { MdClose } from "react-icons/md"
 import styled from 'styled-components';
 
 
@@ -34,3 +34,14 @@ export const Button = styled.button`
     cursor: pointer;
 `;
 
+export const CrossIcon = styled(MdClose)`
+    margin-left: 5px;
+    color: gray;
+
+    :hover{
+        color: red;
+        cursor: pointer;
+
+        transform: scale(1.3);
+    }
+`;
